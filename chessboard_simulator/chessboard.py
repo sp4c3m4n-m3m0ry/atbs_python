@@ -104,26 +104,31 @@ def print_help():
 
 
 main_board = copy.copy(STARTING_PIECES)
+print_help()
 while True:
-    print_chess_board(main_board)
-    response = input("> ").split()
+    try:
+        print_chess_board(main_board)
+        response = input("> ").split()
 
-    if response[0] == "move":
-        main_board[response[2]] = main_board[response[1]]
-        del main_board[response[1]]
-    elif response[0] == "remove":
-        del main_board[response[1]]
-    elif response[0] == "set":
-        main_board[response[1]] = response[2]
-    elif response[0] == "reset":
-        main_board = copy.copy(STARTING_PIECES)
-    elif response[0] == "clear":
-        main_board = {}
-    elif response[0] == "fill":
-        for y in "87654321":
-            for x in "abcdefgh":
-                main_board[x + y] = response[1]
-    elif response[0] == "help":
-        print_help()
-    elif response[0] == "quit":
+        if response[0] == "move":
+            main_board[response[2]] = main_board[response[1]]
+            del main_board[response[1]]
+        elif response[0] == "remove":
+            del main_board[response[1]]
+        elif response[0] == "set":
+            main_board[response[1]] = response[2]
+        elif response[0] == "reset":
+            main_board = copy.copy(STARTING_PIECES)
+        elif response[0] == "clear":
+            main_board = {}
+        elif response[0] == "fill":
+            for y in "87654321":
+                for x in "abcdefgh":
+                    main_board[x + y] = response[1]
+        elif response[0] == "help":
+            print_help()
+        elif response[0] == "quit":
+            sys.exit()
+    except KeyboardInterrupt as keyboard_interrupt:
+        print("Exiting due to keyboard interrupt: ", str(keyboard_interrupt))
         sys.exit()
